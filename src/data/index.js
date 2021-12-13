@@ -127,4 +127,18 @@ const eStatus = {
   busy: "bg-yellow-600",
 };
 
-export { iconsBottom, users, eStatus };
+const messages = [
+  { id: 1, messages: "Hi Henna, how you", time: "16:12", isYou: true },
+  { id: 2, messages: "I finally found a job!", time: "16:34", isYou: false },
+  {
+    id: 3,
+    messages: "Congrats! After all this searches you finally made it.",
+    time: "16:14",
+    isYou: true,
+  },
+  { id: 4, messages: "In which company btw?", time: "16:42", isYou: true },
+  { id: 5, messages: "UI Designer in Facebook!", time: "16:45", isYou: false },
+  { id: 6, messages: "Great!", time: "16:57", isYou: true },
+];
+
+export { iconsBottom, users, eStatus, messages };

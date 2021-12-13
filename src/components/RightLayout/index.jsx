@@ -1,13 +1,13 @@
 import { faPhoneAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import Scrollbar from "../Scrollbar";
+import Messages from "../Messages";
 import SendMessage from "../SendMessage";
 // import PropTypes from 'prop-types'
 
 function RightLayout(props) {
   return (
-    <div className="relative h-full flex flex-col">
+    <div className="h-full flex flex-col">
       <div className="flex py-2">
         <div className="w-12 h-12 rounded-full mr-4">
           <img
@@ -28,10 +28,8 @@ function RightLayout(props) {
           <FontAwesomeIcon icon={faSearch} className="text-xl text-gray-500" />
         </div>
       </div>
-      <Scrollbar style={{ height: "inherit", boder: "1px solid #000" }}>
-        Haha
-      </Scrollbar>
-      <div className="absolute bottom-0 w-full h-16">
+      <Messages />
+      <div className="p-4 h-24 shadow-lg rounded-l-xl rounded-r-xl">
         <SendMessage />
       </div>
     </div>

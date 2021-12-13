@@ -28,9 +28,8 @@ function LeftLayout(props) {
           <User key={String(index)} user={item} />
         ))}
       </Scrollbar>
-      <div className="h-12"></div>
-      <div className="absolute bottom-0 left-0 right-0 bg-white z-10">
-        <div className="flex justify-between py-2">
+      <div className="h-24 rounded-l-xl rounded-r-xl bg-white z-10">
+        <div className="flex justify-between items-center p-2 h-full">
           {iconsBottom.map((item, index) => (
             <FontAwesomeIcon
               key={String(index)}
