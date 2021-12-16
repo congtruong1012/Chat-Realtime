@@ -1,18 +1,31 @@
-import LeftLayout from "./components/LeftLayout";
-import RightLayout from "./components/RightLayout";
+import { Route, Routes } from "react-router-dom";
+import Login from "./containers/Pages/Login";
+import Messages from "./containers/Pages/Messages";
+import Register from "./containers/Pages/Register";
+import PrivateRoute from "./containers/Features/PrivateRoute";
+import CheckToken from "./containers/Features/CheckToken";
 
 function App() {
   return (
-    <div className="max-w-5xl h-screen mx-auto border rounded-xl shadow-sm">
-      <div className="flex h-full p-4">
-        <div className="h-full w-1/2 px-4 border-r-2">
-          <LeftLayout />
-        </div>
-        <div className="h-full w-1/2 px-4">
-          <RightLayout />
-        </div>
-      </div>
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <Messages />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <CheckToken>
+            <Login />
+          </CheckToken>
+        }
+      />
+      <Route path="/register" element={<Register />} />
+    </Routes>
   );
 }
 
