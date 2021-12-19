@@ -1,22 +1,30 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { iconsBottom, users } from "../../../data";
 import Scrollbar from "../../../components/Scrollbar";
 import User from "../../../components/User";
-import { useNavigate } from "react-router-dom";
-import { deleteCookie } from "../../../utils/cookie";
+// import { useHistory } from "react-router-dom";
 import AxiosClient from "../../../api";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getChannel } from "./channelsSlice";
 // import PropTypes from 'prop-types'
 
 function Channels(props) {
-  const nav = useNavigate();
+  // const { push } = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getChannel());
+  }, []);
 
   const handleLogout = async () => {
-    deleteCookie("token");
     try {
       await AxiosClient.get("/api/users/logout");
-      nav("/login");
+      localStorage.removeItem("token");
+      // push("/login");
     } catch (error) {
       console.log("handleLogout ~ error", error);
     }

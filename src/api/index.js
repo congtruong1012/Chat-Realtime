@@ -1,17 +1,18 @@
 import Axios from "axios";
-import { getCookie } from "../utils/cookie";
+import { getCookie, setCookie } from "../utils/cookie";
 
 const AxiosClient = Axios.create({
   baseURL: "http://localhost:4000",
   headers: {
     "Content-Type": "application/json",
   },
-  validateStatus: status => status === 200
-  // timeout: 2000,
+  validateStatus: (status) => status === 200,
+  withCredentials: true,
+  // timeout: 4000,
 });
 
 // const isTokenExpired = false;
-// let refreshTokenRequest: Promise<string> | null;
+// let refreshTokenRequest;
 
 // Add a request interceptor
 AxiosClient.interceptors.request.use(
@@ -24,7 +25,7 @@ AxiosClient.interceptors.request.use(
   },
   function (error) {
     // Do something with request error
-    console.log('error', error)
+    console.log("error", error);
     return Promise.reject(error);
   }
 );
@@ -34,31 +35,31 @@ AxiosClient.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    return response.data;
+    return response;
   },
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     // const originalConfig = error.config;
 
-    // if (originalConfig.url !== "/login" && error.response) {
+    // const arrNonCheck = [
+    //   "/api/users/login",
+    //   "/api/users/create",
+    //   "/api/users/logout",
+    // ];
+
+    // if (!arrNonCheck.includes(originalConfig.url) && error.response) {
     //   // Access Token was expired
     //   if (error.response.status === 401) {
-    //     if (refreshTokenRequest) {
-    //       refreshTokenRequest.then((token: string) => {
-    //         originalConfig.headers["Authorization"] = `Bearer ${token}`;
-    //       });
-    //     } else {
-    //       const refreshToken = localStorage.getItem("refresh-token");
-    //       refreshTokenRequest = AxiosClient.post("/token", {
-    //         refreshToken,
-    //       }).then((res) => {
-    //         refreshTokenRequest = null;
-    //         const { token } = res.data;
-    //         localStorage.setItem("token", token);
-    //         return token;
-    //       });
-    //     }
+    //     const refreshToken = getCookie("refreshToken");
+    //     AxiosClient.post("/api/users/token", {
+    //       refreshToken,
+    //     }).then((res) => {
+    //       const { token } = res.data;
+    //       setCookie("token", token);
+    //       localStorage.removeItem("refreshToken");
+    //       return token;
+    //     });
     //   }
     // }
 

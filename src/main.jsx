@@ -1,17 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App";
+import App from "./containers/App";
 import SocketProvider from "./context/socket";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import store from "./store";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "./utils/history";
 
 ReactDOM.render(
   <React.StrictMode>
     <SocketProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
+      </Provider>
     </SocketProvider>
   </React.StrictMode>,
   document.getElementById("root")

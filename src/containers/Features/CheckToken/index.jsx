@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getCookie } from "../../../utils/cookie";
-import { Navigate } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function CheckToken(props) {
-  const { children } = props;
-  const token = getCookie("token");
-  return token ? <Navigate to="/" /> : children;
+  const isLogin = useSelector((state) => state.login.isLogin);
+  return isLogin ? <Redirect to="/" /> : <Route {...props} />;
 }
 
 CheckToken.propTypes = {

@@ -1,14 +1,15 @@
 import md5 from "md5";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AxiosClient from "../../../api";
 // import PropTypes from "prop-types";
 import TemplateLogin from "../../../components/TemplateLogin";
 import { setCookie } from "../../../utils/cookie";
+import { checkTokenSuccess } from "../../App/appSlice";
 
 function Register(props) {
-  const nav = useNavigate();
+  const { push } = useHistory();
   const [isLoading, setLoading] = useState(false);
 
   const [error, setError] = useState("");
@@ -32,11 +33,13 @@ function Register(props) {
         password: md5(data?.password || ""),
         fullname: data?.fullname,
       });
-      const { token } = resp;
-      setCookie("token", token, 12 * 60 * 60 * 1000);
+      const { token, refreshToken } = resp;
+      checkTokenSuccess(resp);
+      setCookie("token", token);
+      setCookie("refreshToken", refreshToken);
       setLoading((prev) => !prev);
       setError("");
-      nav("/");
+      push("/");
     } catch (error) {
       console.log("handleLogin ~ error", error.message);
       setLoading((prev) => !prev);

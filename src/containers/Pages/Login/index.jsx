@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import md5 from "md5";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 // import PropTypes from "prop-types";
 import TemplateLogin from "../../../components/TemplateLogin";
-import { useForm } from "react-hook-form";
-import AxiosClient from "../../../api";
-import md5 from "md5";
-import { setCookie } from "../../../utils/cookie";
+import { loginRequest } from "./loginSlice";
 
 function Login(props) {
-  const nav = useNavigate();
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.login.isLoading);
+  const error = useSelector((state) => state.login.error);
   const {
     register,
     formState: { errors },
@@ -22,24 +22,13 @@ function Login(props) {
     },
   });
 
-  const handleLogin = async (data) => {
-    try {
-      setLoading((prev) => !prev);
-      const resp = await AxiosClient.post("/api/users/login", {
-        username: data?.username || "",
-        password: md5(data?.password || ""),
-      });
-      const { token } = resp;
-      setCookie("token", token, 12 * 60 * 60 * 1000);
-      setError("");
-      setLoading((prev) => !prev);
-
-      nav("/");
-    } catch (error) {
-      console.log("handleLogin ~ error", error);
-      setLoading((prev) => !prev);
-      setError("Login failed");
-    }
+  const handleLogin = (data) => {
+    dispatch(
+      loginRequest({
+        username: data.username,
+        password: md5(data.password),
+      })
+    );
   };
   return (
     <TemplateLogin title="Welcome to system chat">
