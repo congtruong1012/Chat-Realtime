@@ -20,3 +20,13 @@ code {
 [contentEditable="true"]:empty:not(:focus):before {
   content: attr(data-text);
 }
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 1.2s linear infinite; /* Safari */
+  animation: spin 1.2s linear infinite;
+}

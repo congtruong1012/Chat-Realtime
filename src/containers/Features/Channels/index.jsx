@@ -1,33 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { iconsBottom, users } from "../../../data";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Scrollbar from "../../../components/Scrollbar";
 import User from "../../../components/User";
-// import { useHistory } from "react-router-dom";
-import AxiosClient from "../../../api";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { iconsBottom, users } from "../../../data";
+import { logout } from "../../Pages/Login/loginSlice";
 import { getChannel } from "./channelsSlice";
 // import PropTypes from 'prop-types'
 
 function Channels(props) {
-  // const { push } = useHistory();
   const dispatch = useDispatch();
+  const idLogin = useSelector((state) => state.app?.user?._id);
+  const channels = useSelector((state) => state.channels.channels);
 
   useEffect(() => {
-    dispatch(getChannel());
-  }, []);
+    dispatch(getChannel({ userId: idLogin }));
+  }, [idLogin]);
 
-  const handleLogout = async () => {
-    try {
-      await AxiosClient.get("/api/users/logout");
-      localStorage.removeItem("token");
-      // push("/login");
-    } catch (error) {
-      console.log("handleLogout ~ error", error);
-    }
+  const handleLogout = () => {
+    dispatch(logout());
   };
   return (
     <>
@@ -50,8 +43,8 @@ function Channels(props) {
         />
       </div>
       <Scrollbar style={{ height: "inherit" }}>
-        {users.map((item, index) => (
-          <User key={String(index)} user={item} />
+        {channels.map((item, index) => (
+          <User key={String(index)} channel={item} idLogin={idLogin} />
         ))}
       </Scrollbar>
       <div className="h-24 rounded-l-xl rounded-r-xl bg-white z-10">

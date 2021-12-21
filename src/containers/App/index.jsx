@@ -21,7 +21,9 @@ function App() {
   return (
     <>
       {isLoading ? (
-        "Loading..."
+       <div className="h-25 flex justify-center items-center">
+         <div className="loader"></div>
+       </div>
       ) : (
         <Switch>
           <PrivateRoute path="/" component={Messages} exact />

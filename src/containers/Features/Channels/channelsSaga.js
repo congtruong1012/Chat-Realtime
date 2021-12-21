@@ -1,15 +1,17 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { get } from "../../../api/method";
-import { listApiUsers } from "../../../constants/routesApi";
+import { listApiChannels } from "../../../constants/routesApi";
 import {
   getChannel,
   getChannelSuccess,
   getChannelFailed,
 } from "./channelsSlice";
 
-function* getChannelsApi() {
+function* getChannelsApi({ payload }) {
   try {
-    const res = yield call(get, listApiUsers.users);
+    const res = yield call(get, listApiChannels.get, {
+      userId: payload?.userId || "",
+    });
     if (res.status === 200) {
       yield put(getChannelSuccess(res.data));
     }

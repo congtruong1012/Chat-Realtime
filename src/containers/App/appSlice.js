@@ -3,7 +3,7 @@ import { setCookie } from "../../utils/cookie";
 const app = createSlice({
   name: "app",
   initialState: {
-    isLoading: true,
+    isLoading: false,
     isLogin: false,
     user: {},
     error: {},
