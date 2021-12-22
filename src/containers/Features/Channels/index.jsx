@@ -10,7 +10,7 @@ import { logout } from "../../Pages/Login/loginSlice";
 import { getChannel } from "./channelsSlice";
 // import PropTypes from 'prop-types'
 
-function Channels(props) {
+const Channels = function (props) {
   const dispatch = useDispatch();
   const idLogin = useSelector((state) => state.app?.user?._id);
   const channels = useSelector((state) => state.channels.channels);
@@ -35,7 +35,7 @@ function Channels(props) {
       <div className="relative mb-8">
         <input
           className="rounded-2xl border-none outline-none pl-14 py-2 bg-gray-100 w-full"
-          placeholder={`Search for chats & messages`}
+          placeholder="Search for chats & messages"
         />
         <FontAwesomeIcon
           icon={faSearch}
@@ -62,7 +62,7 @@ function Channels(props) {
       </div>
     </>
   );
-}
+};
 
 Channels.propTypes = {};
 

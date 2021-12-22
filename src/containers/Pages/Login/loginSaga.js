@@ -1,4 +1,5 @@
 import { call, takeLatest, put } from "redux-saga/effects";
+import { push } from "connected-react-router";
 import {
   loginRequest,
   loginSuccess,
@@ -9,13 +10,13 @@ import {
 } from "./loginSlice";
 import { post, get } from "../../../api/method";
 import { listApiUsers } from "../../../constants/routesApi";
-import { push } from "connected-react-router";
 import { checkTokenSuccess } from "../../App/appSlice";
+
 function* loginApi({ payload }) {
   try {
     const res = yield call(post, listApiUsers.login, payload);
     if (res.status === 200) {
-      yield put(checkTokenSuccess(res.data))
+      yield put(checkTokenSuccess(res.data));
       yield put(loginSuccess());
       yield put(push("/"));
     }

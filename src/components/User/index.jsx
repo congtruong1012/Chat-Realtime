@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 // import avatar from "../../images/thuychi.jpg";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { eStatus } from "../../data";
 import AxiosClient from "../../api";
 import { listApiUsers } from "../../constants/routesApi";
-import { useDispatch } from "react-redux";
 import { getMessages } from "../../containers/Features/Chats/chatSlice";
 
-function User(props) {
+const User = function (props) {
   const { channel, idLogin } = props;
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
@@ -36,7 +36,7 @@ function User(props) {
 
   const getChats = () => {
     console.log("channel", channel);
-    dispatch(getMessages({...user, channelId: channel?._id}));
+    dispatch(getMessages({ ...user, channelId: channel?._id }));
   };
 
   return (
@@ -51,10 +51,8 @@ function User(props) {
       >
         <img src={user?.avatar} alt="" className="w-full h-full rounded-full" />
         <div
-          className={`absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-white shadow-lg  ${
-            eStatus.online
-          }`}
-        ></div>
+          className={`absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-white shadow-lg  ${eStatus.online}`}
+        />
       </div>
       <div className="flex-grow">
         <div className=" flex justify-between">
@@ -74,7 +72,7 @@ function User(props) {
       </div>
     </div>
   );
-}
+};
 
 User.propTypes = {
   user: PropTypes.object,

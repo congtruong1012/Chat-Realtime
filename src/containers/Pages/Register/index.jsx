@@ -8,7 +8,7 @@ import TemplateLogin from "../../../components/TemplateLogin";
 import { setCookie } from "../../../utils/cookie";
 import { checkTokenSuccess } from "../../App/appSlice";
 
-function Register(props) {
+const Register = function (props) {
   const { push } = useHistory();
   const [isLoading, setLoading] = useState(false);
 
@@ -113,7 +113,7 @@ function Register(props) {
       </div>
     </TemplateLogin>
   );
-}
+};
 
 Register.propTypes = {};
 

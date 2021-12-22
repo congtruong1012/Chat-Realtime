@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import TemplateLogin from "../../../components/TemplateLogin";
 import { loginRequest } from "./loginSlice";
 
-function Login(props) {
+const Login = function (props) {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.login.isLoading);
   const error = useSelector((state) => state.login.error);
@@ -27,7 +27,7 @@ function Login(props) {
       loginRequest({
         username: data.username,
         password: md5(data.password),
-      })
+      }),
     );
   };
   return (
@@ -89,7 +89,7 @@ function Login(props) {
       </div>
     </TemplateLogin>
   );
-}
+};
 
 Login.propTypes = {};
 

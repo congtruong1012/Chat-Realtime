@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import screen from "../../images/image1.jpg";
 import CommonLayout from "../CommonLayout";
 
-function TemplateLogin(props) {
+const TemplateLogin = function (props) {
   const { title, children } = props;
   return (
     <CommonLayout
@@ -22,7 +22,7 @@ function TemplateLogin(props) {
       }
     />
   );
-}
+};
 TemplateLogin.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,

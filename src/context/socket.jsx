@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 
 export const SocketContext = createContext();
 
-function SocketProvider({ children }) {
+const SocketProvider = function ({ children }) {
   const socket = socketIOClient("http://localhost:4000");
 
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
   );
-}
+};
 
 SocketProvider.propTypes = {
   children: PropTypes.node,

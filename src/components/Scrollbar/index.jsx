@@ -7,8 +7,7 @@ import React from "react";
 // https://kingsora.github.io/OverlayScrollbars/#!documentation/options
 /* tạo thanh cuộn */
 export default function Scrollbar(props) {
-  const { children, className, disableTheme, optionsProps, ...otherProps } =
-    props;
+  const { children, className, disableTheme, optionsProps, ...otherProps } =    props;
 
   return (
     <OverlayScrollbarsComponent

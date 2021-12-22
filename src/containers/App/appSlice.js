@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { setCookie } from "../../utils/cookie";
+
 const app = createSlice({
   name: "app",
   initialState: {

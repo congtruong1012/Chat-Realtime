@@ -4,11 +4,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router-dom";
 
-function PrivateRoute(props) {
+const PrivateRoute = function (props) {
   const isLogin = useSelector((state) => state.login.isLogin);
 
   return isLogin ? <Route {...props} /> : <Redirect to="/login" />;
-}
+};
 
 PrivateRoute.propTypes = {
   children: PropTypes.node,

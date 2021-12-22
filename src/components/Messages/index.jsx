@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import _format from "date-fns/format";
 import { SocketContext } from "../../context/socket";
 // import { messages } from "../../data";
 import Scrollbar from "../Scrollbar";
-import PropTypes from "prop-types";
-import _format from "date-fns/format";
 
-function Messages(props) {
+const Messages = function (props) {
   const { messages } = props;
   const idLogin = useSelector((state) => state.app.user?._id);
   // const socket = useContext(SocketContext);
@@ -52,7 +52,7 @@ function Messages(props) {
   ) : (
     <></>
   );
-}
+};
 
 Messages.propTypes = {
   messages: PropTypes.array,

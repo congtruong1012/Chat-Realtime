@@ -15,7 +15,7 @@ function* getMessageApi({ payload }) {
     const resp = yield call(get, listApiMessages.get, {
       channelId: payload?.channelId,
     });
-   
+
     if (resp.status === 200) {
       console.log("function*getMessageApi ~ resp.status", resp.status);
       yield put(getMessagesSuccess(resp.data));

@@ -5,9 +5,9 @@ import CommonLayout from "../../../components/CommonLayout";
 import Channels from "../../Features/Channels";
 import Chats from "../../Features/Chats";
 
-function Messages(props) {
+const Messages = function (props) {
   return <CommonLayout left={<Channels />} right={<Chats />} border />;
-}
+};
 
 Messages.propTypes = {};
 

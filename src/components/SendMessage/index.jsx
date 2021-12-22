@@ -4,7 +4,7 @@ import { SocketContext } from "../../context/socket";
 
 // import PropTypes from 'prop-types'
 
-function SendMessage(props) {
+let SendMessage = function (props) {
   let isYou = true;
   const socket = useContext(SocketContext);
   const ref = useRef();
@@ -13,20 +13,7 @@ function SendMessage(props) {
     const S4 = function () {
       return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
     };
-    return (
-      S4() +
-      S4() +
-      "-" +
-      S4() +
-      "-" +
-      S4() +
-      "-" +
-      S4() +
-      "-" +
-      S4() +
-      S4() +
-      S4()
-    );
+    return `${S4() + S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`;
   };
 
   const handleMessages = (e) => {
@@ -34,14 +21,15 @@ function SendMessage(props) {
       if (!e.shiftKey) {
         e.preventDefault();
         const message = e.target.innerText;
-        console.log('handleMessages ~ message', message)
-        if (message)
-          socket.emit("send-message", {
+        console.log("handleMessages ~ message", message);
+        if (message) {
+        { socket.emit("send-message", {
             id: generateId(),
             messages: message,
             time: format(new Date(), "HH:mm"),
             isYou,
           });
+        }
         isYou = !isYou;
         ref.current.innerText = "";
       }
@@ -55,9 +43,9 @@ function SendMessage(props) {
       contentEditable
       onKeyPress={handleMessages}
       ref={ref}
-    ></div>
+    />
   );
-}
+};
 
 SendMessage.propTypes = {};
 

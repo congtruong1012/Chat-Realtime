@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import LeftLayout from "../LeftLayout";
 import RightLayout from "../RightLayout";
 
-function CommonLayout(props) {
+const CommonLayout = function (props) {
   const { left, right, border } = props;
   return (
     <div className="max-w-5xl h-screen mx-auto border rounded-xl shadow-sm">
@@ -17,7 +17,7 @@ function CommonLayout(props) {
       </div>
     </div>
   );
-}
+};
 
 CommonLayout.propTypes = {
   left: PropTypes.node,

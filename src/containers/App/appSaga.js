@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from "redux-saga/effects";
+import { push } from "connected-react-router";
 import { get } from "../../api/method";
 import { listApiUsers } from "../../constants/routesApi";
 import { checkToken, checkTokenSuccess, checkTokenFailed } from "./appSlice";
-import { push } from "connected-react-router";
 import { loginSuccess } from "../Pages/Login/loginSlice";
 
 function* getCheckTokenApi() {

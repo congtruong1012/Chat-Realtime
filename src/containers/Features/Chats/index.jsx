@@ -6,7 +6,7 @@ import { faPhoneAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Messages from "../../../components/Messages";
 import SendMessage from "../../../components/SendMessage";
 
-function Chats(props) {
+const Chats = function (props) {
   // const dispatch = useDispatch()
   // useEffect(() => {
 
@@ -46,7 +46,7 @@ function Chats(props) {
   ) : (
     <></>
   );
-}
+};
 
 Chats.propTypes = {};
 
