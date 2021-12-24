@@ -13,7 +13,7 @@ function* getMessageApi({ payload }) {
       channelId: payload?.user?.channelId,
     });
     const resp = yield call(get, listApiMessages.get, {
-      channelId: payload?.channelId,
+      userId: payload?._id,
     });
 
     if (resp.status === 200) {

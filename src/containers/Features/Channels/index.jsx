@@ -3,6 +3,7 @@ import { faSearch, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import AutocompleteSearch from "../../../components/AutocompleteSearch";
 import Scrollbar from "../../../components/Scrollbar";
 import User from "../../../components/User";
 import { iconsBottom, users } from "../../../data";
@@ -32,16 +33,7 @@ const Channels = function (props) {
           onClick={handleLogout}
         />
       </div>
-      <div className="relative mb-8">
-        <input
-          className="rounded-2xl border-none outline-none pl-14 py-2 bg-gray-100 w-full"
-          placeholder="Search for chats & messages"
-        />
-        <FontAwesomeIcon
-          icon={faSearch}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 text-2xl text-gray-300"
-        />
-      </div>
+      <AutocompleteSearch />
       <Scrollbar style={{ height: "inherit" }}>
         {channels.map((item, index) => (
           <User key={String(index)} channel={item} idLogin={idLogin} />

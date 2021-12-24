@@ -21,7 +21,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
-  // app: appReducer,
+  app: appReducer,
   login: loginReducer,
   channels: channelsReducer,
   chat: chatReducer,

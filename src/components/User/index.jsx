@@ -36,7 +36,7 @@ const User = function (props) {
 
   const getChats = () => {
     console.log("channel", channel);
-    dispatch(getMessages({ ...user, channelId: channel?._id }));
+    dispatch(getMessages({ ...user }));
   };
 
   return (

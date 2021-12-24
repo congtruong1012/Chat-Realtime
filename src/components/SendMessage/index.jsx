@@ -3,8 +3,7 @@ import React, { useContext, useRef } from "react";
 import { SocketContext } from "../../context/socket";
 
 // import PropTypes from 'prop-types'
-
-let SendMessage = function (props) {
+const SendMessage = () => {
   let isYou = true;
   const socket = useContext(SocketContext);
   const ref = useRef();
@@ -23,7 +22,7 @@ let SendMessage = function (props) {
         const message = e.target.innerText;
         console.log("handleMessages ~ message", message);
         if (message) {
-        { socket.emit("send-message", {
+          socket.emit("send-message", {
             id: generateId(),
             messages: message,
             time: format(new Date(), "HH:mm"),
@@ -35,7 +34,6 @@ let SendMessage = function (props) {
       }
     }
   };
-
   return (
     <div
       className="h-full  rounded-2xl border-none outline-none p-3 bg-gray-200 w-full overflow-y-auto"
@@ -46,7 +44,5 @@ let SendMessage = function (props) {
     />
   );
 };
-
-SendMessage.propTypes = {};
 
 export default SendMessage;

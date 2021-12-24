@@ -12,6 +12,7 @@ const chat = createSlice({
     getMessages: (state, action) => {
       state.isLoading = true;
       state.user = action.payload;
+      state.data = [];
     },
     getMessagesSuccess: (state, action) => {
       state.isLoading = false;
