@@ -12,6 +12,7 @@ import createSagaMiddleware from "redux-saga";
 import appReducer from "./containers/App/appSlice";
 import channelsReducer from "./containers/Features/Channels/channelsSlice";
 import chatReducer from "./containers/Features/Chats/chatSlice";
+import userReducer from "./containers/Features/Users/userSlice";
 import loginReducer from "./containers/Pages/Login/loginSlice";
 import rootSaga from "./rootSaga";
 import { history } from "./utils/history";
@@ -25,12 +26,14 @@ const rootReducer = combineReducers({
   login: loginReducer,
   channels: channelsReducer,
   chat: chatReducer,
+  user: userReducer,
 });
 
 console.log("bbbbbb");
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware, routerMiddleware(history)),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(sagaMiddleware, routerMiddleware(history)),
 });
 
 sagaMiddleware.run(rootSaga);

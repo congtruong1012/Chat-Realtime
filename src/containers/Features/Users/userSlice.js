@@ -1,30 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const chat = createSlice({
-  name: "chat",
+const user = createSlice({
+  name: "user",
   initialState: {
-    user: null,
     isLoading: false,
     data: [],
     error: null,
   },
   reducers: {
-    getMessages: (state, action) => {
+    getUsers: (state, action) => {
       state.isLoading = true;
-      state.user = action.payload;
       state.data = [];
     },
-    getMessagesSuccess: (state, action) => {
+    getUsersSuccess: (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
     },
-    getMessagesFailed: (state, action) => {
+    getUsersFailed: (state, action) => {
       state.isLoading = false;
       state.error = action.payload.message;
+    },
+    resetData: (state) => {
+      state.data = [];
     },
   },
 });
 
-export const { getMessages, getMessagesSuccess, getMessagesFailed } =
-  chat.actions;
-export default chat.reducer;
+export const { getUsers, getUsersSuccess, getUsersFailed, resetData } =
+  user.actions;
+export default user.reducer;
