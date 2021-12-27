@@ -1,6 +1,8 @@
 import { format } from "date-fns";
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { SocketContext } from "../../context/socket";
+import AxiosClient from "../../api";
+import { listApiMessages } from "../../constants/routesApi";
 
 // import PropTypes from 'prop-types'
 const SendMessage = () => {
@@ -15,21 +17,24 @@ const SendMessage = () => {
     return `${S4() + S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`;
   };
 
+  useEffect(() => {
+   ref.current.focus()
+  }, []);
+
   const handleMessages = (e) => {
     if (e.code === "Enter") {
       if (!e.shiftKey) {
         e.preventDefault();
         const message = e.target.innerText;
-        console.log("handleMessages ~ message", message);
         if (message) {
-          socket.emit("send-message", {
-            id: generateId(),
-            messages: message,
-            time: format(new Date(), "HH:mm"),
-            isYou,
-          });
+          // socket.emit("send-message", {
+          //   id: generateId(),
+          //   messages: message,
+          //   time: format(new Date(), "HH:mm"),
+          //   isYou,
+          // });
+          AxiosClient.post(listApiMessages.save, {});
         }
-        isYou = !isYou;
         ref.current.innerText = "";
       }
     }

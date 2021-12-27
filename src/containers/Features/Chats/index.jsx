@@ -35,9 +35,9 @@ const Chats = function (props) {
           <FontAwesomeIcon icon={faSearch} className="text-xl text-gray-500" />
         </div>
       </div>
-      <div className="flex-grow">
+      {/* <div className="flex-grow"> */}
         <Messages messages={messages} user={user} />
-      </div>
+      {/* </div> */}
 
       <div className="p-4 h-24 shadow-lg rounded-l-xl rounded-r-xl">
         <SendMessage />

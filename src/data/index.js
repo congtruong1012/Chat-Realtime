@@ -8,29 +8,32 @@ import {
 
 const iconsBottom = [
   {
-    icon: faUserFriends,
-    isActive: false,
-  },
-  {
-    icon: faPhoneAlt,
-    isActive: false,
-  },
-  {
-    icon: faCamera,
-    isActive: false,
-  },
-  {
-    icon: faUserFriends,
-    isActive: false,
-  },
-  {
     icon: faCommentAlt,
     isActive: true,
+    label: 'Chat'
+  },
+  {
+    icon: faUserFriends,
+    isActive: false,
+    label: 'Groups'
   },
   {
     icon: faUserCircle,
     isActive: false,
+    label: 'Profile'
   },
+  // {
+  //   icon: faPhoneAlt,
+  //   isActive: false,
+  // },
+  // {
+  //   icon: faCamera,
+  //   isActive: false,
+  // },
+  // {
+  //   icon: faUserFriends,
+  //   isActive: false,
+  // },
 ];
 
 const users = [

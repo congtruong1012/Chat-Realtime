@@ -6,7 +6,7 @@ const AxiosClient = Axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  validateStatus: (status) => status === 200,
+  validateStatus: (status) => [200, 201].includes(status),
   withCredentials: true,
   // timeout: 4000,
 });
@@ -27,7 +27,7 @@ AxiosClient.interceptors.request.use(
     // Do something with request error
     console.log("error", error);
     return Promise.reject(error);
-  },
+  }
 );
 
 // Add a response interceptor
@@ -38,31 +38,31 @@ AxiosClient.interceptors.response.use(
     response,
   (error) =>
     // Any status codes that falls outside the range of 2xx cause this function to trigger
-  // Do something with response error
+    // Do something with response error
     // const originalConfig = error.config;
 
     // const arrNonCheck = [
-  //   "/api/users/login",
+    //   "/api/users/login",
     //   "/api/users/create",
     //   "/api/users/logout",
     // ];
 
     // if (!arrNonCheck.includes(originalConfig.url) && error.response) {
-  //   // Access Token was expired
+    //   // Access Token was expired
     //   if (error.response.status === 401) {
     //     const refreshToken = getCookie("refreshToken");
     //     AxiosClient.post("/api/users/token", {
-  //       refreshToken,
+    //       refreshToken,
     //     }).then((res) => {
     //       const { token } = res.data;
     //       setCookie("token", token);
-  //       localStorage.removeItem("refreshToken");
+    //       localStorage.removeItem("refreshToken");
     //       return token;
     //     });
-  //   }
+    //   }
     // }
 
-    Promise.reject(error),
+    Promise.reject(error)
 );
 
 export default AxiosClient;

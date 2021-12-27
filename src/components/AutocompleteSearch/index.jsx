@@ -40,7 +40,7 @@ function AutocompleteSearch(props) {
   };
 
   return (
-    <div className="relative mb-8">
+    <div className="relative mb-4">
       <input
         className="rounded-2xl border-none outline-none pl-14 py-2 bg-gray-100 w-full"
         placeholder="Search for friends "

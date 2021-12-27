@@ -5,7 +5,6 @@ const app = createSlice({
   name: "app",
   initialState: {
     isLoading: false,
-    isLogin: false,
     user: {},
     error: {},
   },
@@ -14,14 +13,16 @@ const app = createSlice({
       state.isLoading = true;
     },
     checkTokenSuccess: (state, action) => {
-      setCookie("isLogin", true, 1 * 60 * 1000);
       state.isLoading = false;
-      state.isLogin = true;
       state.user = action.payload;
     },
     checkTokenFailed: (state, action) => {
       state.isLoading = false;
       state.error = action.payload.message;
+    },
+
+    resetUser: (state) => {
+      state.user = null;
     },
   },
 });
@@ -30,6 +31,7 @@ export const selectIsLoading = (state) => state.app.isLoading;
 export const selectIsLogin = (state) => state.app.isLogin;
 
 const { reducer, actions } = app;
-export const { checkToken, checkTokenSuccess, checkTokenFailed } = actions;
+export const { checkToken, checkTokenSuccess, checkTokenFailed, resetUser } =
+  actions;
 
 export default reducer;

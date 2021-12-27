@@ -6,6 +6,7 @@ import {
   getMessagesFailed,
   getMessagesSuccess,
 } from "./chatSlice";
+import { updateChannel } from "../Channels/channelsSlice";
 
 function* getMessageApi({ payload }) {
   try {
@@ -17,8 +18,10 @@ function* getMessageApi({ payload }) {
     });
 
     if (resp.status === 200) {
-      console.log("function*getMessageApi ~ resp.status", resp.status);
       yield put(getMessagesSuccess(resp.data));
+    }
+    if (resp.status === 201) {
+      yield put(updateChannel(resp.data));
     }
   } catch (error) {
     yield put(getMessagesFailed(error));

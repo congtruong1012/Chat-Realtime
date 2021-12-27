@@ -20,6 +20,7 @@ const User = function (props) {
         setIsLoading((prev) => !prev);
         const members = channel?.members || [];
         const userId = members.find((item) => item !== idLogin);
+        console.log("userId", { members, userId, idLogin });
         const res = await AxiosClient.get(listApiUsers.detail, {
           params: {
             userId,
@@ -42,10 +43,10 @@ const User = function (props) {
   return (
     <div
       onClick={getChats}
-      className="flex items-center cursor-pointer py-2 px-4 rounded-sm hover:bg-gray-100"
+      className="flex items-center cursor-pointer p-2 rounded-sm hover:bg-gray-100"
     >
       <div
-        className={`relative w-12 h-12 rounded-full mr-4 ${
+        className={`relative w-12 h-12 mr-4 ${
           isLoading ? "bg-gray-100 text-red-100" : ""
         }`}
       >

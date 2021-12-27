@@ -22,9 +22,17 @@ const chat = createSlice({
       state.isLoading = false;
       state.error = action.payload.message;
     },
+    resetMessage: (state) => {
+      state.data = [];
+      state.user = null;
+    },
   },
 });
 
-export const { getMessages, getMessagesSuccess, getMessagesFailed } =
-  chat.actions;
+export const {
+  getMessages,
+  getMessagesSuccess,
+  getMessagesFailed,
+  resetMessage,
+} = chat.actions;
 export default chat.reducer;

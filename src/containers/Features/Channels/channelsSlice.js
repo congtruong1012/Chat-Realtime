@@ -10,6 +10,7 @@ const channels = createSlice({
   reducers: {
     getChannel: (state) => {
       state.isLoading = true;
+      state.channels = [];
     },
     getChannelSuccess: (state, action) => {
       state.isLoading = false;
@@ -19,13 +20,17 @@ const channels = createSlice({
       state.isLoading = false;
       state.error = action.payload.message;
     },
+    updateChannel: (state, action) => {
+      state.channels.push(action.payload);
+    },
   },
 });
 
 const { reducer, actions } = channels;
 
-const { getChannel, getChannelSuccess, getChannelFailed } = actions;
+const { getChannel, getChannelSuccess, getChannelFailed, updateChannel } =
+  actions;
 
-export { getChannel, getChannelSuccess, getChannelFailed };
+export { getChannel, getChannelSuccess, getChannelFailed, updateChannel };
 
 export default reducer;
