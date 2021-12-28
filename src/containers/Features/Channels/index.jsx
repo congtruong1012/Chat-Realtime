@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { faSearch, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AutocompleteSearch from "../../../components/AutocompleteSearch";
 import Scrollbar from "../../../components/Scrollbar";
@@ -17,13 +17,13 @@ const Channels = function (props) {
   const user = useSelector((state) => state.app?.user);
   const channels = useSelector((state) => state.channels.channels);
   const socket = useContext(SocketContext);
+  const [usersOnline, setUserOnline] = useState([]);
   useEffect(() => {
     if (user?._id) dispatch(getChannel({ userId: user?._id }));
   }, [user?._id]);
-  
 
   useEffect(() => {
-    socket.on("get-users", (data) => console.log("data", data));
+    socket.on("get-users", (data) => setUserOnline(data));
   }, []);
 
   const handleLogout = () => {
@@ -49,7 +49,12 @@ const Channels = function (props) {
       <AutocompleteSearch />
       <Scrollbar style={{ height: "inherit" }}>
         {channels.map((item, index) => (
-          <User key={String(index)} channel={item} idLogin={user?._id} />
+          <User
+            key={String(index)}
+            channel={item}
+            idLogin={user?._id}
+            usersOnline={usersOnline}
+          />
         ))}
       </Scrollbar>
       <div className="h-24 rounded-l-xl rounded-r-xl bg-white z-10">

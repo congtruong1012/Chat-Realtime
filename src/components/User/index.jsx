@@ -7,20 +7,24 @@ import { useDispatch } from "react-redux";
 import { eStatus } from "../../data";
 import AxiosClient from "../../api";
 import { listApiUsers } from "../../constants/routesApi";
-import { getMessages } from "../../containers/Features/Chats/chatSlice";
+import {
+  getMessages,
+  updateStatusUser,
+} from "../../containers/Features/Chats/chatSlice";
 
 const User = function (props) {
-  const { channel, idLogin } = props;
+  const { channel, idLogin, usersOnline } = props;
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+
+  const members = channel?.members || [];
+  const userId = members.find((item) => item !== idLogin);
 
   useEffect(() => {
     (async () => {
       try {
         setIsLoading((prev) => !prev);
-        const members = channel?.members || [];
-        const userId = members.find((item) => item !== idLogin);
         const res = await AxiosClient.get(listApiUsers.detail, {
           params: {
             userId,
@@ -35,8 +39,18 @@ const User = function (props) {
     })();
   }, []);
 
+  useEffect(() => {
+    if ((Object.keys(user).length > 0, usersOnline.length > 0)) {
+      const index = usersOnline.findIndex((item) => item?.userId === userId);
+      setUser((prev) => {
+        const status = index > -1 ? "online" : "offline";
+        dispatch(updateStatusUser({ status }));
+        return { ...prev, status };
+      });
+    }
+  }, [JSON.stringify(usersOnline), JSON.stringify(user)]);
+
   const getChats = () => {
-    console.log("channel", channel);
     dispatch(getMessages({ ...user }));
   };
 
@@ -52,7 +66,9 @@ const User = function (props) {
       >
         <img src={user?.avatar} alt="" className="w-full h-full rounded-full" />
         <div
-          className={`absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-white shadow-lg  ${eStatus.online}`}
+          className={`absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-white shadow-lg  bg-${
+            eStatus[user?.status]
+          }`}
         />
       </div>
       <div className="flex-grow">
@@ -77,6 +93,7 @@ const User = function (props) {
 
 User.propTypes = {
   user: PropTypes.object,
+  usersOnline: PropTypes.array,
 };
 
 export default User;

@@ -124,10 +124,10 @@ const users = [
 ];
 
 const eStatus = {
-  online: "bg-green-500",
-  offline: "bg-gray-300",
-  block: "bg-red-600",
-  busy: "bg-yellow-600",
+  online: "green-500",
+  offline: "gray-300",
+  block: "red-600",
+  busy: "yellow-600",
 };
 
 const messages = [

@@ -1,8 +1,7 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { saveMessage } from "../../containers/Features/Chats/chatSlice";
 import { SocketContext } from "../../context/socket";
-import AxiosClient from "../../api";
-import { listApiMessages } from "../../constants/routesApi";
-import { useSelector } from "react-redux";
 
 // import PropTypes from 'prop-types'
 const SendMessage = () => {
@@ -10,6 +9,7 @@ const SendMessage = () => {
   const ref = useRef();
   const channel = useSelector((state) => state.chat.channel);
   const user = useSelector((state) => state.app.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     ref.current.focus();
@@ -21,13 +21,18 @@ const SendMessage = () => {
         e.preventDefault();
         const message = e.target.innerText;
         if (message) {
+          const receiveId = (channel?.members || []).find(
+            (item) => item !== user?._id
+          );
+          console.log("handleMessages ~ receiveId", receiveId);
           const params = {
             text: message,
             from: user?._id,
+            to: receiveId,
             channelId: channel?._id,
           };
           socket.emit("send-message", params);
-          AxiosClient.post(listApiMessages.save, params);
+          dispatch(saveMessage(params));
         }
         ref.current.innerText = "";
       }

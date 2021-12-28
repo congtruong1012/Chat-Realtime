@@ -5,10 +5,18 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Messages from "../../../components/Messages";
 import SendMessage from "../../../components/SendMessage";
+import { eStatus } from "../../../data";
 
 const Chats = function (props) {
   const messages = useSelector((state) => state.chat.data);
   const user = useSelector((state) => state.chat.user);
+
+  const firstCase = (text) => {
+    if (!text) return "";
+    const [first, ...rest] = text;
+    return `${first.toUpperCase()}${rest.join("")}`;
+  };
+
   return user ? (
     <div className="flex flex-col h-full">
       <div className="flex py-2">
@@ -21,7 +29,9 @@ const Chats = function (props) {
         </div>
         <div className="flex-grow">
           <h2 className="text-base font-extrabold">{user?.fullname}</h2>
-          <p className="text-green-500">Online</p>
+          <p className={`text-${eStatus[user?.status]}`}>
+            {firstCase(user?.status)}
+          </p>
         </div>
         <div className="flex">
           <FontAwesomeIcon

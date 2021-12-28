@@ -29,7 +29,6 @@ const rootReducer = combineReducers({
   user: userReducer,
 });
 
-console.log("bbbbbb");
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>

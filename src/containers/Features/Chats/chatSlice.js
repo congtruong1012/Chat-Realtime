@@ -31,6 +31,17 @@ const chat = createSlice({
     updateMessages: (state, action) => {
       state.data.push(action.payload);
     },
+    updateStatusUser: (state, action) => {
+      Object.assign(state.user || {}, action.payload);
+    },
+
+    saveMessage: () => {},
+    saveMessageSucess: (state, action) => {
+      state.data.push(action.payload);
+    },
+    saveMessageFail: (state, action) => {
+      state.error = action.payload.message;
+    },
   },
 });
 
@@ -40,5 +51,9 @@ export const {
   getMessagesFailed,
   resetMessage,
   updateMessages,
+  updateStatusUser,
+  saveMessage,
+  saveMessageSucess,
+  saveMessageFail,
 } = chat.actions;
 export default chat.reducer;
