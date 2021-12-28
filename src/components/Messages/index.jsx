@@ -17,9 +17,9 @@ const Messages = function (props) {
 
   useEffect(() => {
     socket.on("receive-message", (data) => {
-      console.log("useEffect ~ data", data);
       dispatch(updateMessages(data));
     });
+    socket.on("get-users", (data) => console.log("data", data));
   }, []);
 
   useEffect(() => {

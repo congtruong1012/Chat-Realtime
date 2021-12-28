@@ -1,16 +1,12 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { faPhoneAlt, faVideo } from "@fortawesome/free-solid-svg-icons";
 // import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhoneAlt, faVideo } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import { useSelector } from "react-redux";
 import Messages from "../../../components/Messages";
 import SendMessage from "../../../components/SendMessage";
 
 const Chats = function (props) {
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-
-  // }, [])
   const messages = useSelector((state) => state.chat.data);
   const user = useSelector((state) => state.chat.user);
   return user ? (
@@ -39,7 +35,7 @@ const Chats = function (props) {
         </div>
       </div>
       {/* <div className="flex-grow"> */}
-        <Messages messages={messages} user={user} />
+      <Messages messages={messages} user={user} />
       {/* </div> */}
 
       <div className="p-4 h-24 shadow-lg rounded-l-xl rounded-r-xl">

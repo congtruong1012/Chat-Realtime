@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { faSearch, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AutocompleteSearch from "../../../components/AutocompleteSearch";
 import Scrollbar from "../../../components/Scrollbar";
@@ -9,16 +9,22 @@ import User from "../../../components/User";
 import { iconsBottom, users } from "../../../data";
 import { logout } from "../../Pages/Login/loginSlice";
 import { getChannel } from "./channelsSlice";
+import { SocketContext } from "../../../context/socket";
 // import PropTypes from 'prop-types'
 
 const Channels = function (props) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.app?.user);
   const channels = useSelector((state) => state.channels.channels);
-
+  const socket = useContext(SocketContext);
   useEffect(() => {
     if (user?._id) dispatch(getChannel({ userId: user?._id }));
   }, [user?._id]);
+  
+
+  useEffect(() => {
+    socket.on("get-users", (data) => console.log("data", data));
+  }, []);
 
   const handleLogout = () => {
     dispatch(logout());

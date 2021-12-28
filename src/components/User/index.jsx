@@ -14,13 +14,13 @@ const User = function (props) {
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     (async () => {
       try {
         setIsLoading((prev) => !prev);
         const members = channel?.members || [];
         const userId = members.find((item) => item !== idLogin);
-        console.log("userId", { members, userId, idLogin });
         const res = await AxiosClient.get(listApiUsers.detail, {
           params: {
             userId,
