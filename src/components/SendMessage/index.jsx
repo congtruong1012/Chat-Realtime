@@ -1,24 +1,18 @@
-import { format } from "date-fns";
 import React, { useContext, useRef, useEffect } from "react";
 import { SocketContext } from "../../context/socket";
 import AxiosClient from "../../api";
 import { listApiMessages } from "../../constants/routesApi";
+import { useSelector } from "react-redux";
 
 // import PropTypes from 'prop-types'
 const SendMessage = () => {
-  let isYou = true;
   const socket = useContext(SocketContext);
   const ref = useRef();
-
-  const generateId = () => {
-    const S4 = function () {
-      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    };
-    return `${S4() + S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`;
-  };
+  const channel = useSelector((state) => state.chat.channel);
+  const user = useSelector((state) => state.app.user);
 
   useEffect(() => {
-   ref.current.focus()
+    ref.current.focus();
   }, []);
 
   const handleMessages = (e) => {
@@ -27,13 +21,13 @@ const SendMessage = () => {
         e.preventDefault();
         const message = e.target.innerText;
         if (message) {
-          // socket.emit("send-message", {
-          //   id: generateId(),
-          //   messages: message,
-          //   time: format(new Date(), "HH:mm"),
-          //   isYou,
-          // });
-          AxiosClient.post(listApiMessages.save, {});
+          const params = {
+            text: message,
+            from: user?._id,
+            channelId: channel?._id,
+          };
+          socket.emit("send-message", params);
+          AxiosClient.post(listApiMessages.save, params);
         }
         ref.current.innerText = "";
       }

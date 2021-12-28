@@ -10,9 +10,6 @@ import { updateChannel } from "../Channels/channelsSlice";
 
 function* getMessageApi({ payload }) {
   try {
-    console.log({
-      channelId: payload?.user?.channelId,
-    });
     const resp = yield call(get, listApiMessages.get, {
       userId: payload?._id,
     });

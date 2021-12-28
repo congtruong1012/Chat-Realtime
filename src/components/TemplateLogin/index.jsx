@@ -13,7 +13,7 @@ const TemplateLogin = function (props) {
         </div>
       }
       right={
-        <div className="h-full pt-20">
+        <div className="h-full overflow-y-auto pt-20">
           <h2 className="text-3xl text-center text-gray-500 font-bold mb-4">
             {title}
           </h2>

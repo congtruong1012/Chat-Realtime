@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhoneAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPhoneAlt, faVideo } from "@fortawesome/free-solid-svg-icons";
 import Messages from "../../../components/Messages";
 import SendMessage from "../../../components/SendMessage";
 
@@ -30,9 +30,12 @@ const Chats = function (props) {
         <div className="flex">
           <FontAwesomeIcon
             icon={faPhoneAlt}
-            className="text-xl text-gray-500 mr-4"
+            className="text-xl text-gray-500 mr-4 cursor-pointer"
           />
-          <FontAwesomeIcon icon={faSearch} className="text-xl text-gray-500" />
+          <FontAwesomeIcon
+            icon={faVideo}
+            className="text-xl text-gray-500 cursor-pointer"
+          />
         </div>
       </div>
       {/* <div className="flex-grow"> */}

@@ -6,6 +6,7 @@ const chat = createSlice({
     user: null,
     isLoading: false,
     data: [],
+    channel: null,
     error: null,
   },
   reducers: {
@@ -16,7 +17,8 @@ const chat = createSlice({
     },
     getMessagesSuccess: (state, action) => {
       state.isLoading = false;
-      state.data = action.payload;
+      state.data = action.payload.data;
+      state.channel = action.payload.channel;
     },
     getMessagesFailed: (state, action) => {
       state.isLoading = false;
@@ -26,6 +28,9 @@ const chat = createSlice({
       state.data = [];
       state.user = null;
     },
+    updateMessages: (state, action) => {
+      state.data.push(action.payload);
+    },
   },
 });
 
@@ -34,5 +39,6 @@ export const {
   getMessagesSuccess,
   getMessagesFailed,
   resetMessage,
+  updateMessages,
 } = chat.actions;
 export default chat.reducer;

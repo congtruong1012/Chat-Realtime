@@ -1,25 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import _format from "date-fns/format";
 import { SocketContext } from "../../context/socket";
 // import { messages } from "../../data";
 import Scrollbar from "../Scrollbar";
+import { updateMessages } from "../../containers/Features/Chats/chatSlice";
 
 const Messages = function (props) {
   const { messages } = props;
   const ref = useRef();
   const idLogin = useSelector((state) => state.app.user?._id);
-  // const socket = useContext(SocketContext);
-  // const [messages, setMessages] = useState([]);
+  const socket = useContext(SocketContext);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   socket.on("receive-message", (data) => {
-  //     console.log("useEffect ~ data", data);
-  //     setMessages((prev) => [...prev, data]);
-  //   });
-  // }, []);
+  useEffect(() => {
+    socket.on("receive-message", (data) => {
+      console.log("useEffect ~ data", data);
+      dispatch(updateMessages(data));
+    });
+  }, []);
 
   useEffect(() => {
     if (ref.current)
@@ -35,6 +36,7 @@ const Messages = function (props) {
       style={{
         height: "inherit",
         padding: 12,
+        // flexGrow: 1,
       }}
       itemRef={ref}
     >
