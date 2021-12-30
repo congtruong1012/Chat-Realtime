@@ -1,14 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const user = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {
     isLoading: false,
     data: [],
     error: null,
   },
   reducers: {
-    getUsers: (state, action) => {
+    getUsers: (state) => {
       state.isLoading = true;
       state.data = [];
     },

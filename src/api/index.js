@@ -1,11 +1,9 @@
-import Axios from "axios";
-import { getCookie, setCookie } from "../utils/cookie";
+import Axios from 'axios';
+import { getCookie } from '../utils/cookie';
 
 const AxiosClient = Axios.create({
-  baseURL: "http://localhost:4000",
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: 'http://localhost:4000',
+  headers: { 'Content-Type': 'application/json' },
   validateStatus: (status) => [200, 201].includes(status),
   withCredentials: true,
   // timeout: 4000,
@@ -18,16 +16,12 @@ const AxiosClient = Axios.create({
 AxiosClient.interceptors.request.use(
   (config) => {
     // Do something before request is sent
-    const token = getCookie("token");
+    const token = getCookie('token');
 
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
-  (error) => {
-    // Do something with request error
-    console.log("error", error);
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error),
 );
 
 // Add a response interceptor
@@ -62,7 +56,7 @@ AxiosClient.interceptors.response.use(
     //   }
     // }
 
-    Promise.reject(error)
+    Promise.reject(error),
 );
 
 export default AxiosClient;

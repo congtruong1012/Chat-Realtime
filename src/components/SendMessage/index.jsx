@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { saveMessage } from "../../containers/Features/Chats/chatSlice";
-import { SocketContext } from "../../context/socket";
+import React, { useContext, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveMessage } from '../../containers/Features/Chats/chatSlice';
+import { SocketContext } from '../../context/socket';
 
 // import PropTypes from 'prop-types'
-const SendMessage = () => {
+function SendMessage() {
   const socket = useContext(SocketContext);
   const ref = useRef();
   const channel = useSelector((state) => state.chat.channel);
@@ -16,25 +16,24 @@ const SendMessage = () => {
   }, []);
 
   const handleMessages = (e) => {
-    if (e.code === "Enter") {
+    if (e.code === 'Enter') {
       if (!e.shiftKey) {
         e.preventDefault();
         const message = e.target.innerText;
         if (message) {
           const receiveId = (channel?.members || []).find(
-            (item) => item !== user?._id
+            (item) => item !== user?._id,
           );
-          console.log("handleMessages ~ receiveId", receiveId);
           const params = {
             text: message,
             from: user?._id,
             to: receiveId,
             channelId: channel?._id,
           };
-          socket.emit("send-message", params);
+          socket.emit('send-message', params);
           dispatch(saveMessage(params));
         }
-        ref.current.innerText = "";
+        ref.current.innerText = '';
       }
     }
   };
@@ -45,8 +44,9 @@ const SendMessage = () => {
       contentEditable
       onKeyPress={handleMessages}
       ref={ref}
+      a
     />
   );
-};
+}
 
 export default SendMessage;

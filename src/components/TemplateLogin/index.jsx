@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import screen from "../../images/image1.jpg";
-import CommonLayout from "../CommonLayout";
+import React from 'react';
+import PropTypes from 'prop-types';
+import screen from '../../images/image1.jpg';
+import CommonLayout from '../CommonLayout';
 
-const TemplateLogin = function (props) {
+function TemplateLogin(props) {
   const { title, children } = props;
   return (
     <CommonLayout
@@ -22,7 +22,7 @@ const TemplateLogin = function (props) {
       }
     />
   );
-};
+}
 TemplateLogin.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,

@@ -1,20 +1,20 @@
-import { faPhoneAlt, faVideo } from "@fortawesome/free-solid-svg-icons";
+import { faPhoneAlt, faVideo } from '@fortawesome/free-solid-svg-icons';
 // import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { useSelector } from "react-redux";
-import Messages from "../../../components/Messages";
-import SendMessage from "../../../components/SendMessage";
-import { eStatus } from "../../../data";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Messages from '../../../components/Messages';
+import SendMessage from '../../../components/SendMessage';
+import { eStatus } from '../../../data';
 
-const Chats = function (props) {
+function Chats() {
   const messages = useSelector((state) => state.chat.data);
   const user = useSelector((state) => state.chat.user);
 
   const firstCase = (text) => {
-    if (!text) return "";
+    if (!text) return '';
     const [first, ...rest] = text;
-    return `${first.toUpperCase()}${rest.join("")}`;
+    return `${first.toUpperCase()}${rest.join('')}`;
   };
 
   return user ? (
@@ -53,9 +53,9 @@ const Chats = function (props) {
       </div>
     </div>
   ) : (
-    <></>
+    <div />
   );
-};
+}
 
 Chats.propTypes = {};
 

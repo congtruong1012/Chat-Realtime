@@ -1,14 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import PropTypes from "prop-types";
-import React from "react";
-import { useSelector } from "react-redux";
-import { Redirect, Route } from "react-router-dom";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Redirect, Route } from 'react-router-dom';
 
-const PrivateRoute = function (props) {
+function PrivateRoute(props) {
   const isLogin = useSelector((state) => state.login.isLogin);
 
   return isLogin ? <Route {...props} /> : <Redirect to="/login" />;
-};
+}
 
 PrivateRoute.propTypes = {
   children: PropTypes.node,

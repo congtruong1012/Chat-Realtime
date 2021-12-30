@@ -2,20 +2,20 @@ import {
   combineReducers,
   configureStore,
   createAction,
-} from "@reduxjs/toolkit";
+} from '@reduxjs/toolkit';
 import {
   connectRouter,
   LOCATION_CHANGE,
   routerMiddleware,
-} from "connected-react-router";
-import createSagaMiddleware from "redux-saga";
-import appReducer from "./containers/App/appSlice";
-import channelsReducer from "./containers/Features/Channels/channelsSlice";
-import chatReducer from "./containers/Features/Chats/chatSlice";
-import userReducer from "./containers/Features/Users/userSlice";
-import loginReducer from "./containers/Pages/Login/loginSlice";
-import rootSaga from "./rootSaga";
-import { history } from "./utils/history";
+} from 'connected-react-router';
+import createSagaMiddleware from 'redux-saga';
+import appReducer from './containers/App/appSlice';
+import channelsReducer from './containers/Features/Channels/channelsSlice';
+import chatReducer from './containers/Features/Chats/chatSlice';
+import userReducer from './containers/Features/Users/userSlice';
+import loginReducer from './containers/Pages/Login/loginSlice';
+import rootSaga from './rootSaga';
+import history from './utils/history';
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();

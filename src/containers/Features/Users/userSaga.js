@@ -1,11 +1,7 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import { get } from "../../../api/method";
-import { listApiUsers } from "../../../constants/routesApi";
-import {
-  getUsers,
-  getUsersFailed,
-  getUsersSuccess,
-} from "./userSlice";
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { get } from '../../../api/method';
+import { listApiUsers } from '../../../constants/routesApi';
+import { getUsers, getUsersFailed, getUsersSuccess } from './userSlice';
 
 function* getMessageApi({ payload }) {
   try {

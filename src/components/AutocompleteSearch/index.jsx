@@ -1,15 +1,15 @@
-import { faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getMessages } from "../../containers/Features/Chats/chatSlice";
-import { getUsers, resetData } from "../../containers/Features/Users/userSlice";
-import Scrollbar from "../Scrollbar";
+import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMessages } from '../../containers/Features/Chats/chatSlice';
+import { getUsers, resetData } from '../../containers/Features/Users/userSlice';
+import Scrollbar from '../Scrollbar';
 // import PropTypes from 'prop-types'
 
-function AutocompleteSearch(props) {
+function AutocompleteSearch() {
   // const user = useSelector(state => state)
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [open, setOpen] = useState(false);
   const users = useSelector((state) => state.user.data);
   const isLoading = useSelector((state) => state.user.isLoading);
@@ -21,8 +21,7 @@ function AutocompleteSearch(props) {
   };
 
   useEffect(() => {
-    let timeout;
-    timeout = setTimeout(() => {
+    const timeout = setTimeout(() => {
       if (search) {
         dispatch(getUsers({ name: search }));
         setOpen(true);
@@ -36,7 +35,7 @@ function AutocompleteSearch(props) {
 
   const openChat = (user) => {
     dispatch(getMessages({ ...user }));
-    setSearch("");
+    setSearch('');
   };
 
   return (
@@ -53,15 +52,15 @@ function AutocompleteSearch(props) {
       />
       {open && (
         <div className="absolute w-full h-60 z-30 rounded-md bg-white shadow-md">
-          <Scrollbar style={{ height: "inherit", padding: "8px 0" }}>
+          <Scrollbar style={{ height: 'inherit', padding: '8px 0' }}>
             {isLoading ? (
               Array.from(Array(5)).map((user, i) => (
                 <div
                   key={String(i)}
                   className="flex items-center p-2 cursor-pointer"
                 >
-                  <div className=" w-10 h-10 mx-2 bg-gray-100 rounded-full"></div>
-                  <div className="px-2 bg-gray-100 h-6 w-3/4 mx-auto"></div>
+                  <div className="w-10 h-10 mx-2 bg-gray-100 rounded-full" />
+                  <div className="px-2 bg-gray-100 h-6 w-3/4 mx-auto" />
                 </div>
               ))
             ) : (
@@ -69,17 +68,19 @@ function AutocompleteSearch(props) {
                 {users.length > 0 ? (
                   users.map((user, i) => (
                     <div
+                      aria-hidden="true"
                       key={String(i)}
                       className="flex items-center p-2 cursor-pointer hover:bg-gray-100"
                       onClick={() => openChat(user)}
                     >
                       <div className=" w-10 h-10  mx-2">
                         <img
-                          src={user?.avatar || ""}
+                          src={user?.avatar || ''}
                           className="h-full w-full rounded-full"
+                          alt="avatar"
                         />
                       </div>
-                      <div className="flex-1 px-2">{user?.fullname || ""}</div>
+                      <div className="flex-1 px-2">{user?.fullname || ''}</div>
                     </div>
                   ))
                 ) : (

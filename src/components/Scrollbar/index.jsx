@@ -1,7 +1,7 @@
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import "overlayscrollbars/css/OverlayScrollbars.css";
-import PropTypes from "prop-types";
-import React from "react";
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import 'overlayscrollbars/css/OverlayScrollbars.css';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 // https://www.npmjs.com/package/overlayscrollbars-react
 // https://kingsora.github.io/OverlayScrollbars/#!documentation/options
@@ -13,13 +13,13 @@ export default function Scrollbar(props) {
     <OverlayScrollbarsComponent
       options={{
         scrollbars: {
-          autoHide: "leave",
+          autoHide: 'leave',
           autoHideDelay: 0,
           clickScrolling: true,
         },
         overflowBehavior: {
-          x: "hidden",
-          y: "scroll",
+          x: 'hidden',
+          y: 'scroll',
         },
         paddingAbsolute: true,
         ...optionsProps,

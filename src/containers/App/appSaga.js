@@ -1,9 +1,9 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import { push } from "connected-react-router";
-import { get } from "../../api/method";
-import { listApiUsers } from "../../constants/routesApi";
-import { checkToken, checkTokenSuccess, checkTokenFailed } from "./appSlice";
-import { loginSuccess } from "../Pages/Login/loginSlice";
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
+import { get } from '../../api/method';
+import { listApiUsers } from '../../constants/routesApi';
+import { checkToken, checkTokenSuccess, checkTokenFailed } from './appSlice';
+import { loginSuccess } from '../Pages/Login/loginSlice';
 
 function* getCheckTokenApi() {
   try {
@@ -14,7 +14,7 @@ function* getCheckTokenApi() {
     }
   } catch (error) {
     yield put(checkTokenFailed(error));
-    yield put(push("/login"));
+    yield put(push('/login'));
   }
 }
 

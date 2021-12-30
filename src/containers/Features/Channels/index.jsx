@@ -1,18 +1,17 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { faSearch, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useContext, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import AutocompleteSearch from "../../../components/AutocompleteSearch";
-import Scrollbar from "../../../components/Scrollbar";
-import User from "../../../components/User";
-import { iconsBottom, users } from "../../../data";
-import { logout } from "../../Pages/Login/loginSlice";
-import { getChannel } from "./channelsSlice";
-import { SocketContext } from "../../../context/socket";
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import AutocompleteSearch from '../../../components/AutocompleteSearch';
+import Scrollbar from '../../../components/Scrollbar';
+import User from '../../../components/User';
+import { SocketContext } from '../../../context/socket';
+import { iconsBottom } from '../../../data';
+import { logout } from '../../Pages/Login/loginSlice';
+import { getChannel } from './channelsSlice';
 // import PropTypes from 'prop-types'
 
-const Channels = function (props) {
+function Channels() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.app?.user);
   const channels = useSelector((state) => state.channels.channels);
@@ -23,7 +22,7 @@ const Channels = function (props) {
   }, [user?._id]);
 
   useEffect(() => {
-    socket.on("get-users", (data) => setUserOnline(data));
+    socket.on('get-users', (data) => setUserOnline(data));
   }, []);
 
   const handleLogout = () => {
@@ -47,7 +46,7 @@ const Channels = function (props) {
         />
       </div>
       <AutocompleteSearch />
-      <Scrollbar style={{ height: "inherit" }}>
+      <Scrollbar style={{ height: 'inherit' }}>
         {channels.map((item, index) => (
           <User
             key={String(index)}
@@ -62,7 +61,7 @@ const Channels = function (props) {
           {iconsBottom.map((item, index) => (
             <div
               className={`text-center cursor-pointer ${
-                item.isActive ? "text-yellow-500" : "text-gray-500"
+                item.isActive ? 'text-yellow-500' : 'text-gray-500'
               }`}
               key={String(index)}
             >
@@ -78,7 +77,7 @@ const Channels = function (props) {
       </div>
     </>
   );
-};
+}
 
 Channels.propTypes = {};
 

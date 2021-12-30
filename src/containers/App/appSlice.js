@@ -1,15 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { setCookie } from "../../utils/cookie";
+import { createSlice } from '@reduxjs/toolkit';
 
 const app = createSlice({
-  name: "app",
+  name: 'app',
   initialState: {
     isLoading: false,
     user: {},
     error: {},
   },
   reducers: {
-    checkToken: (state, action) => {
+    checkToken: (state) => {
       state.isLoading = true;
     },
     checkTokenSuccess: (state, action) => {

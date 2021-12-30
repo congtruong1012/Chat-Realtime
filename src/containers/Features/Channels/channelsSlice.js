@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const channels = createSlice({
-  name: "channels",
+  name: 'channels',
   initialState: {
     isLoading: true,
     channels: [],

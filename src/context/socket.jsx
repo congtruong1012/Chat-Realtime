@@ -1,16 +1,16 @@
-import React, { createContext } from "react";
-import socketIOClient from "socket.io-client";
-import PropTypes from "prop-types";
+import React, { createContext } from 'react';
+import socketIOClient from 'socket.io-client';
+import PropTypes from 'prop-types';
 
 export const SocketContext = createContext();
 
-const SocketProvider = function ({ children }) {
-  const socket = socketIOClient("http://localhost:4000");
+function SocketProvider({ children }) {
+  const socket = socketIOClient('http://localhost:4000');
 
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
   );
-};
+}
 
 SocketProvider.propTypes = {
   children: PropTypes.node,

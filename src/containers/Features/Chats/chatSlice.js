@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const chat = createSlice({
-  name: "chat",
+  name: 'chat',
   initialState: {
     user: null,
     isLoading: false,

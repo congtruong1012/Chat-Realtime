@@ -1,6 +1,6 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import { get, post } from "../../../api/method";
-import { listApiMessages } from "../../../constants/routesApi";
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { get, post } from '../../../api/method';
+import { listApiMessages } from '../../../constants/routesApi';
 import {
   getMessages,
   getMessagesFailed,
@@ -8,8 +8,8 @@ import {
   saveMessage,
   saveMessageFail,
   saveMessageSucess,
-} from "./chatSlice";
-import { updateChannel } from "../Channels/channelsSlice";
+} from './chatSlice';
+import { updateChannel } from '../Channels/channelsSlice';
 
 function* getMessageApi({ payload }) {
   try {
@@ -34,7 +34,7 @@ function* saveMessageApi({ payload }) {
     if (resp.status === 200) {
       yield put(saveMessageSucess(resp.data));
     }
-  } catch (error) { 
+  } catch (error) {
     yield put(saveMessageFail(error));
   }
 }

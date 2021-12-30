@@ -1,85 +1,45 @@
+const fs = require('fs');
+const path = require('path');
+
+const prettierOptions = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
+);
+
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2020: true,
   },
-  extends: ["plugin:react/recommended", "airbnb"],
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
   parserOptions: {
-    ecmaFeatures: { jsx: true },
-    ecmaVersion: 13,
-    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 11,
+    sourceType: 'module',
   },
-  plugins: ["react", "react-hooks", "jsx-a11y"],
+  plugins: ['react', 'prettier', 'jsx-a11y'],
   rules: {
-    quotes: ["error", "double"],
-    "no-param-reassign": ["error", { props: false }],
-    "object-curly-newline": [
-      "error",
+    'prettier/prettier': ['error', prettierOptions],
+    'no-param-reassign': ['error', { props: false }],
+    'prefer-const': ['error', { ignoreReadBeforeAssign: true }],
+    'react/jsx-no-useless-fragment': [2, { allowExpressions: true }],
+    'react/require-default-props': 0,
+    'no-underscore-dangle': 0,
+    'react/forbid-prop-types': 0,
+    'react/jsx-props-no-spreading': 0,
+    'jsx-a11y/no-static-element-interactions': 0,
+    'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
+    'no-useless-escape': 0,
+    'jsx-a11y/anchor-is-valid': 0,
+    'import/no-extraneous-dependencies': [
+      'error',
       {
-        multiline: true,
-        minProperties: 4,
+        devDependencies: true,
+        optionalDependencies: false,
+        peerDependencies: false,
       },
     ],
-    "linebreak-style": 0,
-
-    "arrow-body-style": [2, "as-needed"],
-    "class-methods-use-this": 0,
-    "import/imports-first": 0,
-    "import/newline-after-import": 0,
-    "import/no-dynamic-require": 0,
-    "import/no-extraneous-dependencies": 0,
-    "import/no-named-as-default": 0,
-    "import/no-unresolved": 2,
-    "import/no-webpack-loader-syntax": 0,
-    "import/prefer-default-export": 0,
-    // indent: [
-    //   2,
-    //   2,
-    //   {
-    //     SwitchCase: 1,
-    //   },
-    // ],
-    "jsx-a11y/aria-props": 2,
-    "jsx-a11y/heading-has-content": 0,
-    "jsx-a11y/label-has-associated-control": [
-      2,
-      {
-        // NOTE: If this error triggers, either disable it or add
-        // your custom components, labels and attributes via these options
-        // See https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md
-        controlComponents: ["Input"],
-      },
-    ],
-    "jsx-a11y/label-has-for": 0,
-    "jsx-a11y/mouse-events-have-key-events": 2,
-    "jsx-a11y/role-has-required-aria-props": 2,
-    "jsx-a11y/role-supports-aria-props": 2,
-    "max-len": 0,
-    "newline-per-chained-call": 0,
-    "no-confusing-arrow": 0,
-    "no-console": 1, // TODO: anh Tri xóa console.log trước khi commit nha
-    "no-unused-vars": 2,
-    "no-use-before-define": 0,
-    "prefer-template": 2,
-
-    "react/function-component-definition": [
-      "error",
-      {
-        namedComponents:
-          "function-declaration" | "function-expression" | "arrow-function",
-      },
-    ],
-    "react/destructuring-assignment": 0,
-    "react-hooks/rules-of-hooks": "error",
-    "react/jsx-closing-tag-location": 0,
-    "react/forbid-prop-types": 0,
-    "react/jsx-first-prop-new-line": [2, "multiline"],
-    "react/jsx-filename-extension": 0,
-    "react/jsx-no-target-blank": 0,
-    "react/jsx-uses-vars": 2,
-    "react/require-default-props": 0,
-    "react/require-extension": 0,
-    "react/self-closing-comp": 0,
-    "react/sort-comp": 0,
+    'global-require': 0,
   },
 };

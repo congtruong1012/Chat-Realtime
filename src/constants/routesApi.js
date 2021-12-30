@@ -1,8 +1,8 @@
-const ROOT_URL = "/api";
+const ROOT_URL = '/api';
 
-const USER = "/users";
-const CHANNEL = "/channel";
-const MESSAGE = "/message";
+const USER = '/users';
+const CHANNEL = '/channel';
+const MESSAGE = '/message';
 
 export const listApiUsers = {
   login: `${ROOT_URL}${USER}/login`,

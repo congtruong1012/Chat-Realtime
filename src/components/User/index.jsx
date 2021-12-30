@@ -1,18 +1,16 @@
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
 // import avatar from "../../images/thuychi.jpg";
-import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { eStatus } from "../../data";
-import AxiosClient from "../../api";
-import { listApiUsers } from "../../constants/routesApi";
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import AxiosClient from '../../api';
+import { listApiUsers } from '../../constants/routesApi';
 import {
   getMessages,
   updateStatusUser,
-} from "../../containers/Features/Chats/chatSlice";
+} from '../../containers/Features/Chats/chatSlice';
+import { eStatus } from '../../data';
 
-const User = function (props) {
+function User(props) {
   const { channel, idLogin, usersOnline } = props;
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
@@ -33,7 +31,6 @@ const User = function (props) {
         setUser(res.data);
         setIsLoading((prev) => !prev);
       } catch (error) {
-        console.log("Lỗi rồi");
         setIsLoading((prev) => !prev);
       }
     })();
@@ -43,7 +40,7 @@ const User = function (props) {
     if ((Object.keys(user).length > 0, usersOnline.length > 0)) {
       const index = usersOnline.findIndex((item) => item?.userId === userId);
       setUser((prev) => {
-        const status = index > -1 ? "online" : "offline";
+        const status = index > -1 ? 'online' : 'offline';
         dispatch(updateStatusUser({ status }));
         return { ...prev, status };
       });
@@ -58,10 +55,11 @@ const User = function (props) {
     <div
       onClick={getChats}
       className="flex items-center cursor-pointer p-2 rounded-sm hover:bg-gray-100"
+      aria-hidden
     >
       <div
         className={`relative w-12 h-12 mr-4 ${
-          isLoading ? "bg-gray-100 text-red-100" : ""
+          isLoading ? 'bg-gray-100 text-red-100' : ''
         }`}
       >
         <img src={user?.avatar} alt="" className="w-full h-full rounded-full" />
@@ -75,7 +73,7 @@ const User = function (props) {
         <div className=" flex justify-between">
           <h2
             className={`text-xl font-extrabold ${
-              isLoading ? "bg-gray-400 text-gray-100 h-1/2 w-1" : ""
+              isLoading ? 'bg-gray-400 text-gray-100 h-1/2 w-1' : ''
             }`}
           >
             {user?.fullname}
@@ -89,11 +87,12 @@ const User = function (props) {
       </div>
     </div>
   );
-};
+}
 
 User.propTypes = {
-  user: PropTypes.object,
+  idLogin: PropTypes.string,
   usersOnline: PropTypes.array,
+  channel: PropTypes.object,
 };
 
 export default User;

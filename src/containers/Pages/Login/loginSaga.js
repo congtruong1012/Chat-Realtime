@@ -1,17 +1,17 @@
-import { call, takeLatest, put, all } from "redux-saga/effects";
-import { push } from "connected-react-router";
+import { push } from 'connected-react-router';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { get, post } from '../../../api/method';
+import { listApiUsers } from '../../../constants/routesApi';
+import { checkTokenSuccess, resetUser } from '../../App/appSlice';
+import { resetMessage } from '../../Features/Chats/chatSlice';
 import {
+  loginFailed,
   loginRequest,
   loginSuccess,
-  loginFailed,
-  logoutSuccess,
-  logoutFailed,
   logout,
-} from "./loginSlice";
-import { post, get } from "../../../api/method";
-import { listApiUsers } from "../../../constants/routesApi";
-import { checkTokenSuccess, resetUser } from "../../App/appSlice";
-import { resetMessage } from "../../Features/Chats/chatSlice";
+  logoutFailed,
+  logoutSuccess,
+} from './loginSlice';
 
 function* loginApi({ payload }) {
   try {
@@ -19,7 +19,7 @@ function* loginApi({ payload }) {
     if (res.status === 200) {
       yield put(checkTokenSuccess(res.data));
       yield put(loginSuccess());
-      yield put(push("/"));
+      yield put(push('/'));
     }
   } catch (error) {
     yield put(loginFailed(error));
@@ -33,7 +33,7 @@ function* logoutApi() {
       yield put(resetMessage());
       yield put(resetUser());
       yield put(logoutSuccess());
-      yield put(push("/login"));
+      yield put(push('/login'));
     }
   } catch (error) {
     yield put(logoutFailed(error));
