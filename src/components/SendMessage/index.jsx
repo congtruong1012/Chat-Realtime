@@ -13,7 +13,7 @@ function SendMessage() {
 
   useEffect(() => {
     ref.current.focus();
-  }, []);
+  }, [channel?._id]);
 
   const handleMessages = (e) => {
     if (e.code === 'Enter') {

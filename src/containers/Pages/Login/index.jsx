@@ -32,68 +32,69 @@ function Login() {
   };
   return (
     <TemplateLogin title="Welcome to system chat">
-      <div className="mb-3">
-        <label htmlFor="username" className="block text-gray-500 mb-2">
-          Username
-        </label>
-        <input
-          type="text"
-          className="bg-gray-200 w-full p-4 rounded-2xl outline-none"
-          {...register('username', { required: 'Username is required' })}
-          placeholder="Enter username"
-          id="username"
-        />
-        {errors?.username && (
-          <small className="text-red-500">
-            {errors?.username?.message || ''}
-          </small>
-        )}
-      </div>
-      <div className="mb-6">
-        <label htmlFor="password" className="block text-gray-500 mb-2">
-          Password
-        </label>
-        <input
-          type="password"
-          className="bg-gray-200 w-full p-4 rounded-2xl outline-none"
-          {...register('password', { required: 'Password is required' })}
-          placeholder="Enter password"
-          id="password"
-        />
-        {errors?.password && (
-          <small className="text-red-500">
-            {errors?.password?.message || ''}
-          </small>
-        )}
-      </div>
-      {error && (
-        <div className="mb-4 py-3 pl-6 bg-red-400 font-semibold text-white rounded-md">
-          {error}
+      <form onSubmit={handleSubmit(handleLogin)}>
+        <div className="mb-3">
+          <label htmlFor="username" className="block text-gray-500 mb-2">
+            Username
+          </label>
+          <input
+            type="text"
+            className="bg-gray-200 w-full p-4 rounded-2xl outline-none"
+            {...register('username', { required: 'Username is required' })}
+            placeholder="Enter username"
+            id="username"
+          />
+          {errors?.username && (
+            <small className="text-red-500">
+              {errors?.username?.message || ''}
+            </small>
+          )}
         </div>
-      )}
-      <div className="mb-6 text-right">
-        <Link to="#" className=" text-gray-800 font-bold">
-          Forgot password?
-        </Link>
-      </div>
-      <div className="mb-6">
-        <button
-          onClick={handleSubmit(handleLogin)}
-          className={`w-full ${
-            isLoading ? 'bg-gray-400' : 'bg-blue-600'
-          } p-3 text-white rounded-2xl text-center`}
-          disabled={isLoading}
-          type="submit"
-        >
-          Login
-        </button>
-      </div>
-      <div className="mb-4 font-bold text-center">
-        <span>{`You don\'t have an account?`}</span>
-        <Link to="/register" className="text-blue-600 ">
-          Register
-        </Link>
-      </div>
+        <div className="mb-6">
+          <label htmlFor="password" className="block text-gray-500 mb-2">
+            Password
+          </label>
+          <input
+            type="password"
+            className="bg-gray-200 w-full p-4 rounded-2xl outline-none"
+            {...register('password', { required: 'Password is required' })}
+            placeholder="Enter password"
+            id="password"
+          />
+          {errors?.password && (
+            <small className="text-red-500">
+              {errors?.password?.message || ''}
+            </small>
+          )}
+        </div>
+        {error && (
+          <div className="mb-4 py-3 pl-6 bg-red-400 font-semibold text-white rounded-md">
+            {error}
+          </div>
+        )}
+        <div className="mb-6 text-right">
+          <Link to="#" className=" text-gray-800 font-bold">
+            Forgot password?
+          </Link>
+        </div>
+        <div className="mb-6">
+          <button
+            className={`w-full ${
+              isLoading ? 'bg-gray-400' : 'bg-blue-600'
+            } p-3 text-white rounded-2xl text-center`}
+            disabled={isLoading}
+            type="submit"
+          >
+            Login
+          </button>
+        </div>
+        <div className="mb-4 font-bold text-center">
+          <span>{`You don\'t have an account?`}</span>
+          <Link to="/register" className="text-blue-600 ">
+            Register
+          </Link>
+        </div>
+      </form>
     </TemplateLogin>
   );
 }
